@@ -1,4 +1,5 @@
 import "./App.css";
+import RollDice from "./RollDice";
 function App() {
   return (
     <div className="App">
@@ -31,9 +32,8 @@ function App() {
             </p>
           </div>
         </section>
-        <button class="btn btn--roll">🎲 Roll dice</button>
-        <img src="dice-5.png" alt="Playing dice" className="dice" />
         <button className="btn btn--new">🔄 New game</button>
+        <RollDice />
         <button className="btn btn--hold">📥 Hold</button>
       </main>
     </div>
