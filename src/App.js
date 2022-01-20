@@ -11,6 +11,7 @@ import dice6 from "./images/dice-6.png";
 function App() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [currentScore1, setCurrentScore1] = useState(0);
+  const [totalScore1, setTotalScore1] = useState(0);
   let diceArray = [dice1, dice2, dice3, dice4, dice5, dice6];
 
   function handleDiceRoll(randomNum) {
@@ -22,6 +23,12 @@ function App() {
       setCurrentScore1(currentScore1 + randomNum);
     }
   }
+
+  function handleHold(event) {
+    event.preventDefault();
+    setTotalScore1(totalScore1 + currentScore1);
+    setCurrentScore1(0);
+    // switch player
   }
 
   return (
@@ -32,7 +39,7 @@ function App() {
             Player 1
           </h2>
           <p className="score" id="score--0">
-            0
+            {totalScore1}
           </p>
           <div className="current">
             <p className="current-label">Current</p>
@@ -64,7 +71,9 @@ function App() {
           />
         ) : null}
         <RollDice onDiceRoll={handleDiceRoll} />
-        <button className="btn btn--hold">📥 Hold</button>
+        <button className="btn btn--hold" onClick={handleHold}>
+          📥 Hold
+        </button>
       </main>
     </div>
   );
