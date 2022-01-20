@@ -52,7 +52,7 @@ function App() {
 
   function handleHold(event) {
     event.preventDefault();
-    if (totalScore1 + currentScore1 > 9) {
+    if (totalScore1 + currentScore1 > 99) {
       setWhoseTurn({ player1: "winner", player2: false });
       updateScores("player1");
     } else if (totalScore2 + currentScore2 > 99) {
