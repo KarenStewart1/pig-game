@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
 import RollDice from "./RollDice";
-import dice1 from "./images/dice-1.png";
-import dice2 from "./images/dice-2.png";
-import dice3 from "./images/dice-3.png";
-import dice4 from "./images/dice-4.png";
-import dice5 from "./images/dice-5.png";
-import dice6 from "./images/dice-6.png";
+
+function importAll(r) {
+  let images = {};
+  r.keys().forEach((item, index) => {
+    images[item.replace("./", "")] = r(item);
+  });
+  return images;
+}
+const images = importAll(require.context("./images", false, /\.(png)$/));
 
 function App() {
   const [randomNumber, setRandomNumber] = useState(null);
@@ -15,7 +18,6 @@ function App() {
   const [currentScore2, setCurrentScore2] = useState(0);
   const [totalScore2, setTotalScore2] = useState(0);
   const [whoseTurn, setWhoseTurn] = useState({ player1: true, player2: false });
-  let diceArray = [dice1, dice2, dice3, dice4, dice5, dice6];
 
   function switchPlayer() {
     setWhoseTurn(
@@ -125,7 +127,7 @@ function App() {
         </button>
         {randomNumber ? (
           <img
-            src={diceArray[randomNumber - 1]}
+            src={images[`dice-${randomNumber}.png`]}
             alt="Playing dice"
             className="dice"
           />
