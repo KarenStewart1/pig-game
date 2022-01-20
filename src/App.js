@@ -23,31 +23,25 @@ function App() {
 
   function handleDiceRoll(randomNum) {
     setRandomNumber(randomNum);
-    if (whoseTurn === "player1") {
-      if (randomNum === 1) {
-        setCurrentScore1(0);
-        switchPlayer();
-      } else {
-        setCurrentScore1(currentScore1 + randomNum);
-      }
+    if (randomNum === 1) {
+      whoseTurn === "player1" ? setCurrentScore1(0) : setCurrentScore2(0);
+      switchPlayer();
+    } else if (whoseTurn === "player1") {
+      setCurrentScore1(currentScore1 + randomNum);
     } else {
-      if (randomNum === 1) {
-        setCurrentScore2(0);
-        switchPlayer();
-      } else {
-        setCurrentScore2(currentScore2 + randomNum);
-      }
+      setCurrentScore2(currentScore2 + randomNum);
     }
   }
 
   function handleHold(event) {
     event.preventDefault();
-    setCurrentScore1(0);
-    setCurrentScore2(0);
-    whoseTurn === "player1"
-      ? setTotalScore1(totalScore1 + currentScore1)
-      : setTotalScore2(totalScore2 + currentScore2);
-
+    if (whoseTurn === "player1") {
+      setTotalScore1(totalScore1 + currentScore1);
+      setCurrentScore1(0);
+    } else {
+      setTotalScore2(totalScore2 + currentScore2);
+      setCurrentScore2(0);
+    }
     switchPlayer();
   }
   console.log(whoseTurn);
