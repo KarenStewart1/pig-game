@@ -7,12 +7,21 @@ import dice3 from "./images/dice-3.png";
 import dice4 from "./images/dice-4.png";
 import dice5 from "./images/dice-5.png";
 import dice6 from "./images/dice-6.png";
+
 function App() {
   const [randomNumber, setRandomNumber] = useState(null);
+  const [currentScore1, setCurrentScore1] = useState(0);
   let diceArray = [dice1, dice2, dice3, dice4, dice5, dice6];
 
   function handleDiceRoll(randomNum) {
     setRandomNumber(randomNum);
+    if (randomNum === 1) {
+      setCurrentScore1(0);
+      // switch player
+    } else {
+      setCurrentScore1(currentScore1 + randomNum);
+    }
+  }
   }
 
   return (
@@ -28,7 +37,7 @@ function App() {
           <div className="current">
             <p className="current-label">Current</p>
             <p className="current-score" id="current--0">
-              0
+              {currentScore1}
             </p>
           </div>
         </section>
