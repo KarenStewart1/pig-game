@@ -48,7 +48,11 @@ function App() {
   return (
     <div className="App">
       <main>
-        <section className="player player--0 player--active">
+        <section
+          className={
+            whoseTurn === "player1" ? "player player--active" : "player"
+          }
+        >
           <h2 className="name" id="name--0">
             Player 1
           </h2>
@@ -62,7 +66,11 @@ function App() {
             </p>
           </div>
         </section>
-        <section className="player player--1">
+        <section
+          className={
+            whoseTurn === "player2" ? "player player--active" : "player"
+          }
+        >
           <h2 className="name" id="name--1">
             Player 2
           </h2>
