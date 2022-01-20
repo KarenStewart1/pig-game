@@ -14,20 +14,26 @@ function App() {
   const [totalScore1, setTotalScore1] = useState(0);
   const [currentScore2, setCurrentScore2] = useState(0);
   const [totalScore2, setTotalScore2] = useState(0);
+  const [whoseTurn, setWhoseTurn] = useState("player1");
   let diceArray = [dice1, dice2, dice3, dice4, dice5, dice6];
+
+  function switchPlayer() {
+    setWhoseTurn(whoseTurn === "player1" ? "player2" : "player1");
+  }
 
   function handleDiceRoll(randomNum) {
     setRandomNumber(randomNum);
-      // switch player
     if (whoseTurn === "player1") {
       if (randomNum === 1) {
         setCurrentScore1(0);
+        switchPlayer();
       } else {
         setCurrentScore1(currentScore1 + randomNum);
       }
     } else {
       if (randomNum === 1) {
         setCurrentScore2(0);
+        switchPlayer();
       } else {
         setCurrentScore2(currentScore2 + randomNum);
       }
@@ -37,10 +43,14 @@ function App() {
   function handleHold(event) {
     event.preventDefault();
     setCurrentScore1(0);
-    // switch player
     setCurrentScore2(0);
+    whoseTurn === "player1"
+      ? setTotalScore1(totalScore1 + currentScore1)
+      : setTotalScore2(totalScore2 + currentScore2);
 
+    switchPlayer();
   }
+  console.log(whoseTurn);
   return (
     <div className="App">
       <main>
