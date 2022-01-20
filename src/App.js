@@ -38,6 +38,7 @@ function App() {
       }
     }
   }
+
   function updateScores(...players) {
     if (players.includes("player1")) {
       setTotalScore1(totalScore1 + currentScore1);
@@ -54,13 +55,22 @@ function App() {
     if (totalScore1 + currentScore1 > 9) {
       setWhoseTurn({ player1: "winner", player2: false });
       updateScores("player1");
-    } else if (totalScore2 + currentScore2 > 9) {
+    } else if (totalScore2 + currentScore2 > 99) {
       setWhoseTurn({ player1: false, player2: "winner" });
       updateScores("player2");
     } else {
       updateScores("player1", "player2");
       switchPlayer();
     }
+  }
+  function startNewGame(event) {
+    event.preventDefault();
+    setCurrentScore1(0);
+    setCurrentScore2(0);
+    setTotalScore1(0);
+    setTotalScore2(0);
+    setRandomNumber(null);
+    setWhoseTurn({ player1: true, player2: false });
   }
 
   return (
@@ -110,7 +120,9 @@ function App() {
             </p>
           </div>
         </section>
-        <button className="btn btn--new">🔄 New game</button>
+        <button className="btn btn--new" onClick={startNewGame}>
+          🔄 New game
+        </button>
         {randomNumber ? (
           <img
             src={diceArray[randomNumber - 1]}
