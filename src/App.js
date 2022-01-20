@@ -12,25 +12,35 @@ function App() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [currentScore1, setCurrentScore1] = useState(0);
   const [totalScore1, setTotalScore1] = useState(0);
+  const [currentScore2, setCurrentScore2] = useState(0);
+  const [totalScore2, setTotalScore2] = useState(0);
   let diceArray = [dice1, dice2, dice3, dice4, dice5, dice6];
 
   function handleDiceRoll(randomNum) {
     setRandomNumber(randomNum);
-    if (randomNum === 1) {
-      setCurrentScore1(0);
       // switch player
+    if (whoseTurn === "player1") {
+      if (randomNum === 1) {
+        setCurrentScore1(0);
+      } else {
+        setCurrentScore1(currentScore1 + randomNum);
+      }
     } else {
-      setCurrentScore1(currentScore1 + randomNum);
+      if (randomNum === 1) {
+        setCurrentScore2(0);
+      } else {
+        setCurrentScore2(currentScore2 + randomNum);
+      }
     }
   }
 
   function handleHold(event) {
     event.preventDefault();
-    setTotalScore1(totalScore1 + currentScore1);
     setCurrentScore1(0);
     // switch player
-  }
+    setCurrentScore2(0);
 
+  }
   return (
     <div className="App">
       <main>
@@ -53,12 +63,12 @@ function App() {
             Player 2
           </h2>
           <p className="score" id="score--1">
-            0
+            {totalScore2}
           </p>
           <div className="current">
             <p className="current-label">Current</p>
             <p className="current-score" id="current--1">
-              0
+              {currentScore2}
             </p>
           </div>
         </section>
