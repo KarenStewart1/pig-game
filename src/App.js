@@ -4,7 +4,7 @@ import RollDice from "./RollDice";
 
 function importAll(r) {
   let images = {};
-  r.keys().forEach((item, index) => {
+  r.keys().forEach((item) => {
     images[item.replace("./", "")] = r(item);
   });
   return images;
