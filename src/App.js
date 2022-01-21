@@ -13,9 +13,8 @@ const images = importAll(require.context("./images", false, /\.(png)$/));
 
 function App() {
   const [randomNumber, setRandomNumber] = useState(null);
-  const [currentScore1, setCurrentScore1] = useState(0);
+  const [currentScore, setCurrentScore] = useState({ player1: 0, player2: 0 });
   const [totalScore1, setTotalScore1] = useState(0);
-  const [currentScore2, setCurrentScore2] = useState(0);
   const [totalScore2, setTotalScore2] = useState(0);
   const [whoseTurn, setWhoseTurn] = useState({ player1: true, player2: false });
 
@@ -31,33 +30,38 @@ function App() {
     if (whoseTurn.player1 !== "winner" && whoseTurn.player2 !== "winner") {
       setRandomNumber(randomNum);
       if (randomNum === 1) {
-        whoseTurn.player1 ? setCurrentScore1(0) : setCurrentScore2(0);
+        setCurrentScore({ player1: 0, player2: 0 });
         switchPlayer();
       } else if (whoseTurn.player1) {
-        setCurrentScore1(currentScore1 + randomNum);
+        setCurrentScore({
+          player1: currentScore.player1 + randomNum,
+          player2: 0,
+        });
       } else {
-        setCurrentScore2(currentScore2 + randomNum);
+        setCurrentScore({
+          player1: 0,
+          player2: currentScore.player2 + randomNum,
+        });
       }
     }
   }
 
   function updateScores(...players) {
     if (players.includes("player1")) {
-      setTotalScore1(totalScore1 + currentScore1);
-      setCurrentScore1(0);
+      setTotalScore1(totalScore1 + currentScore.player1);
+      setCurrentScore({ player1: 0, player2: 0 });
     }
     if (players.includes("player2")) {
-      setTotalScore2(totalScore2 + currentScore2);
-      setCurrentScore2(0);
+      setTotalScore2(totalScore2 + currentScore.player2);
     }
   }
 
   function handleHold(event) {
     event.preventDefault();
-    if (totalScore1 + currentScore1 > 99) {
+    if (totalScore1 + currentScore.player1 > 99) {
       setWhoseTurn({ player1: "winner", player2: false });
       updateScores("player1");
-    } else if (totalScore2 + currentScore2 > 99) {
+    } else if (totalScore2 + currentScore.player2 > 99) {
       setWhoseTurn({ player1: false, player2: "winner" });
       updateScores("player2");
     } else {
@@ -67,8 +71,7 @@ function App() {
   }
   function startNewGame(event) {
     event.preventDefault();
-    setCurrentScore1(0);
-    setCurrentScore2(0);
+    setCurrentScore({ player1: 0, player2: 0 });
     setTotalScore1(0);
     setTotalScore2(0);
     setRandomNumber(null);
@@ -96,7 +99,7 @@ function App() {
           <div className="current">
             <p className="current-label">Current</p>
             <p className="current-score" id="current--0">
-              {currentScore1}
+              {currentScore.player1}
             </p>
           </div>
         </section>
@@ -118,7 +121,7 @@ function App() {
           <div className="current">
             <p className="current-label">Current</p>
             <p className="current-score" id="current--1">
-              {currentScore2}
+              {currentScore.player2}
             </p>
           </div>
         </section>
