@@ -45,14 +45,6 @@ function App() {
     }
   }
 
-  function updateScores() {
-    setTotalScore({
-      player1: totalScore.player1 + currentScore.player1,
-      player2: totalScore.player2 + currentScore.player2,
-    });
-    setCurrentScore({ player1: 0, player2: 0 });
-  }
-
   function handleHold(event) {
     event.preventDefault();
     if (totalScore.player1 + currentScore.player1 > 99) {
@@ -62,8 +54,13 @@ function App() {
     } else {
       switchPlayer();
     }
-    updateScores();
+    setTotalScore({
+      player1: totalScore.player1 + currentScore.player1,
+      player2: totalScore.player2 + currentScore.player2,
+    });
+    setCurrentScore({ player1: 0, player2: 0 });
   }
+
   function startNewGame(event) {
     event.preventDefault();
     setCurrentScore({ player1: 0, player2: 0 });
