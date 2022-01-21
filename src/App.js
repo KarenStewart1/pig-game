@@ -14,8 +14,7 @@ const images = importAll(require.context("./images", false, /\.(png)$/));
 function App() {
   const [randomNumber, setRandomNumber] = useState(null);
   const [currentScore, setCurrentScore] = useState({ player1: 0, player2: 0 });
-  const [totalScore1, setTotalScore1] = useState(0);
-  const [totalScore2, setTotalScore2] = useState(0);
+  const [totalScore, setTotalScore] = useState({ player1: 0, player2: 0 });
   const [whoseTurn, setWhoseTurn] = useState({ player1: true, player2: false });
 
   function switchPlayer() {
@@ -46,34 +45,29 @@ function App() {
     }
   }
 
-  function updateScores(...players) {
-    if (players.includes("player1")) {
-      setTotalScore1(totalScore1 + currentScore.player1);
-      setCurrentScore({ player1: 0, player2: 0 });
-    }
-    if (players.includes("player2")) {
-      setTotalScore2(totalScore2 + currentScore.player2);
-    }
+  function updateScores() {
+    setTotalScore({
+      player1: totalScore.player1 + currentScore.player1,
+      player2: totalScore.player2 + currentScore.player2,
+    });
+    setCurrentScore({ player1: 0, player2: 0 });
   }
 
   function handleHold(event) {
     event.preventDefault();
-    if (totalScore1 + currentScore.player1 > 99) {
+    if (totalScore.player1 + currentScore.player1 > 99) {
       setWhoseTurn({ player1: "winner", player2: false });
-      updateScores("player1");
-    } else if (totalScore2 + currentScore.player2 > 99) {
+    } else if (totalScore.player2 + currentScore.player2 > 99) {
       setWhoseTurn({ player1: false, player2: "winner" });
-      updateScores("player2");
     } else {
-      updateScores("player1", "player2");
       switchPlayer();
     }
+    updateScores();
   }
   function startNewGame(event) {
     event.preventDefault();
     setCurrentScore({ player1: 0, player2: 0 });
-    setTotalScore1(0);
-    setTotalScore2(0);
+    setTotalScore({ player1: 0, player2: 0 });
     setRandomNumber(null);
     setWhoseTurn({ player1: true, player2: false });
   }
@@ -94,7 +88,7 @@ function App() {
             Player 1
           </h2>
           <p className="score" id="score--0">
-            {totalScore1}
+            {totalScore.player1}
           </p>
           <div className="current">
             <p className="current-label">Current</p>
@@ -116,7 +110,7 @@ function App() {
             Player 2
           </h2>
           <p className="score" id="score--1">
-            {totalScore2}
+            {totalScore.player2}
           </p>
           <div className="current">
             <p className="current-label">Current</p>
