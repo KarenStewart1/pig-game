@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import RollDice from "./RollDice";
+import Rules from "./Rules";
 
 function importAll(r) {
   let images = {};
@@ -81,6 +82,8 @@ function App() {
               : "player"
           }
         >
+          {" "}
+          <Rules />
           <h2 className="name" id="name--0">
             Player 1
           </h2>
