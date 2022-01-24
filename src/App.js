@@ -31,16 +31,12 @@ function App() {
       if (randomNum === 1) {
         setCurrentScore({ player1: 0, player2: 0 });
         switchPlayer();
-      } else if (whoseTurn.player1) {
-        setCurrentScore({
-          player1: currentScore.player1 + randomNum,
-          player2: 0,
-        });
       } else {
-        setCurrentScore({
-          player1: 0,
-          player2: currentScore.player2 + randomNum,
-        });
+        setCurrentScore(
+          whoseTurn.player1
+            ? { player1: currentScore.player1 + randomNum, player2: 0 }
+            : { player1: 0, player2: currentScore.player2 + randomNum }
+        );
       }
     }
   }
