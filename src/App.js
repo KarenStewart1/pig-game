@@ -25,7 +25,6 @@ function App() {
         : { player1: true, player2: false }
     );
   }
-
   function handleDiceRoll(randomNum) {
     if (whoseTurn.player1 !== "winner" && whoseTurn.player2 !== "winner") {
       setRandomNumber(randomNum);
@@ -82,17 +81,11 @@ function App() {
               : "player"
           }
         >
-          <h2 className="name" id="name--0">
-            Player 1
-          </h2>
-          <p className="score" id="score--0">
-            {totalScore.player1}
-          </p>
+          <h2 className="name">Player 1</h2>
+          <p className="score">{totalScore.player1}</p>
           <div className="current">
-            <p className="current-label">Current</p>
-            <p className="current-score" id="current--0">
-              {currentScore.player1}
-            </p>
+            <p className="current-label">CURRENT</p>
+            <p className="current-score">{currentScore.player1}</p>
           </div>
         </section>
         <section
@@ -104,17 +97,11 @@ function App() {
               : "player"
           }
         >
-          <h2 className="name" id="name--1">
-            Player 2
-          </h2>
-          <p className="score" id="score--1">
-            {totalScore.player2}
-          </p>
+          <h2 className="name">Player 2</h2>
+          <p className="score">{totalScore.player2}</p>
           <div className="current">
-            <p className="current-label">Current</p>
-            <p className="current-score" id="current--1">
-              {currentScore.player2}
-            </p>
+            <p className="current-label">CURRENT</p>
+            <p className="current-score">{currentScore.player2}</p>
           </div>
         </section>
 
