@@ -82,8 +82,6 @@ function App() {
               : "player"
           }
         >
-          {" "}
-          <Rules />
           <h2 className="name" id="name--0">
             Player 1
           </h2>
@@ -119,9 +117,11 @@ function App() {
             </p>
           </div>
         </section>
+
         <button className="btn btn--new" onClick={startNewGame}>
           🔄 New game
         </button>
+        <Rules />
         {randomNumber ? (
           <img
             src={images[`dice-${randomNumber}.png`]}
