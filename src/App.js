@@ -18,7 +18,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(startingScores);
   const [totalScore, setTotalScore] = useState(startingScores);
   const [whoseTurn, setWhoseTurn] = useState({ player1: true, player2: false });
-
+  // switches player when a player's turn is over
   function switchPlayer() {
     setWhoseTurn(
       whoseTurn.player1
@@ -26,6 +26,7 @@ function App() {
         : { player1: true, player2: false }
     );
   }
+  // produces random number when dice is rolled if neither player has won the game yet. If random number is equal to 1, current scores are reset to 0 and the player's turn is switched. if the random number is not equal to 1, the current score gets updated to current score plus the random number
   function handleDiceRoll(randomNum) {
     if (whoseTurn.player1 !== "winner" && whoseTurn.player2 !== "winner") {
       setRandomNumber(randomNum);
@@ -40,7 +41,7 @@ function App() {
       }
     }
   }
-
+  // when the user presses the hold button: checks if either player has score above 99 (if so, declares winner), if not, switches player and sets total score equal to previous total score plus current score. 
   function handleHold(event) {
     event.preventDefault();
     let player1HasWon = totalScore.player1 + currentScore.player1 > 99;
@@ -59,7 +60,7 @@ function App() {
     });
     setCurrentScore(startingScores);
   }
-
+  // resets all values when user presses "New Game" button
   function startNewGame(event) {
     event.preventDefault();
     setCurrentScore(startingScores);
