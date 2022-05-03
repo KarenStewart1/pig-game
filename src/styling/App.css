@@ -162,3 +162,11 @@ img {
   font-weight: 700;
   color: #c7365f;
 }
+
+footer {
+  color: white;
+  text-align: center;
+}
+footer a {
+  color: white;
+}

@@ -31,7 +31,7 @@ export default function Rules() {
           <p>
             If a player chooses to "hold", their turn total is added to their
             score, and it becomes the next player's turn. The first player to
-            score 100 or more points wins.
+            score at least 100 points wins.
           </p>
         </div>
         <div className="overlay hidden"></div>

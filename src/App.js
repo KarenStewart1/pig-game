@@ -117,6 +117,12 @@ function App() {
           📥 Hold
         </button>
       </main>
+      <footer>
+        Coded by{" "}
+        <a href="https://karenstewart.nl" target="_blank" rel="noreferrer">
+          Karen Stewart
+        </a>
+      </footer>
     </div>
   );
 }
