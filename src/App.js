@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./styling/App.css";
 import RollDice from "./RollDice";
 import Rules from "./Rules";
 
@@ -18,6 +18,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState(startingScores);
   const [totalScore, setTotalScore] = useState(startingScores);
   const [whoseTurn, setWhoseTurn] = useState({ player1: true, player2: false });
+
   // switches player when a player's turn is over
   function switchPlayer() {
     setWhoseTurn(
@@ -41,7 +42,7 @@ function App() {
       }
     }
   }
-  // when the user presses the hold button: checks if either player has score above 99 (if so, declares winner), if not, switches player and sets total score equal to previous total score plus current score. 
+  // when the user presses the hold button: checks if either player has score above 99 (if so, declares winner), if not, switches player and sets total score equal to previous total score plus current score.
   function handleHold(event) {
     event.preventDefault();
     let player1HasWon = totalScore.player1 + currentScore.player1 > 99;

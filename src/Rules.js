@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Rules.css";
+import "./styling/Rules.css";
 
 export default function Rules() {
   const [rulesBox, setRulesBox] = useState(null);
